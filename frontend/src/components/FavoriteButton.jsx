@@ -19,7 +19,7 @@ const FavoriteButton = ({ propertyId, initialIsFavorited = false, onToggle }) =>
     
     try {
       const token = localStorage.getItem('token');
-      const baseUrl = `${window.location.protocol}//${window.location.hostname}:8000/api/favorites`;
+      const baseUrl = `${window.location.protocol}//${window.location.hostname}:8001/api/favorites`;
       const url = isFavorited 
         ? `${baseUrl}/${propertyId}`
         : `${baseUrl}/`;

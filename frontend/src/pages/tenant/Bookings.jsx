@@ -25,7 +25,7 @@ const Bookings = () => {
       setLoading(true);
       setError('');
       const token = localStorage.getItem('token');
-      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8000/api/bookings/my-bookings`, {
+      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8001/api/bookings/my-bookings`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -61,7 +61,7 @@ const Bookings = () => {
       setCancellingId(selectedBooking.id);
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `${window.location.protocol}//${window.location.hostname}:8000/api/bookings/${selectedBooking.id}/status`,
+        `${window.location.protocol}//${window.location.hostname}:8001/api/bookings/${selectedBooking.id}/status`,
         {
           method: 'PATCH',
           headers: {

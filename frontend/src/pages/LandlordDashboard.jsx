@@ -95,7 +95,7 @@ const LandlordDashboard = () => {
       // Fetch bookings for each property
       for (const property of propertiesData) {
         const response = await fetch(
-          `${window.location.protocol}//${window.location.hostname}:8000/api/bookings/property/${property.id}/bookings`,
+          `${window.location.protocol}//${window.location.hostname}:8001/api/bookings/property/${property.id}/bookings`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -245,7 +245,7 @@ const LandlordDashboard = () => {
       setUpdatingBookingId(bookingId);
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `${window.location.protocol}//${window.location.hostname}:8000/api/bookings/${bookingId}/status`,
+        `${window.location.protocol}//${window.location.hostname}:8001/api/bookings/${bookingId}/status`,
         {
           method: 'PATCH',
           headers: {

@@ -49,7 +49,7 @@ const TenantDashboard = () => {
       const url = queryString ? `/properties?${queryString}` : '/properties';
       
       const token = localStorage.getItem('token');
-      const apiUrl = `${window.location.protocol}//${window.location.hostname}:8000/api/tenant${url}`;
+      const apiUrl = `${window.location.protocol}//${window.location.hostname}:8001/api/tenant${url}`;
       const response = await fetch(apiUrl, {
         headers: {
           'Authorization': `Bearer ${token}`

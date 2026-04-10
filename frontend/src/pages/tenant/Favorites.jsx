@@ -22,7 +22,7 @@ const Favorites = () => {
       setLoading(true);
       setError('');
       const token = localStorage.getItem('token');
-      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8000/api/favorites/`, {
+      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8001/api/favorites/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

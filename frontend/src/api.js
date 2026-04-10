@@ -1,4 +1,4 @@
-const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:8000/api`;
+const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:8001/api`;
 
 /**
  * Make an authenticated API request

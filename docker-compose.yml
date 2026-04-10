@@ -4,15 +4,15 @@ services:
 
   postgres:
     image: postgres:16-alpine
-    container_name: rentease-postgres
+    container_name: rentease-postgres-part2
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres123
       POSTGRES_DB: rentease
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_part2:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -20,27 +20,38 @@ services:
       retries: 5
 
   backend:
-    image: durmuhammad/rentease-backend:v1.0
-    container_name: rentease-backend
+    image: python:3.11-slim
+    container_name: rentease-backend-part2
+    working_dir: /app
+    volumes:
+      - ./backend:/app
     environment:
       DATABASE_URL: postgresql://postgres:postgres123@postgres:5432/rentease
       SECRET_KEY: your-secret-key-change-this-in-production
-      CORS_ORIGINS: '["http://localhost:80", "http://localhost:8000", "http://localhost:5173"]'
+      CORS_ORIGINS: '["*"]'
     ports:
-      - "8000:8000"
+      - "8001:8000"
     depends_on:
       postgres:
         condition: service_healthy
-    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    command: >
+      sh -c "pip install -r requirements.txt &&
+             uvicorn main:app --host 0.0.0.0 --port 8000"
 
   frontend:
-    image: durmuhammad/rentease-frontend:v1.0
-    container_name: rentease-frontend
+    image: node:18-alpine
+    container_name: rentease-frontend-part2
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
     ports:
-      - "80:80"
+      - "5174:5173"
     depends_on:
       - backend
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8001/api
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
 
 volumes:
-  postgres_data:
+  postgres_data_part2:
     driver: local
