@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import DashboardSidebar from '../components/DashboardSidebar';
-import PropertyCard from '../components/PropertyCard';
-import ApplicationCard from '../components/ApplicationCard';
-import SearchFilters from '../components/SearchFilters';
 import { tenantAPI } from '../api';
-import { useAuth } from '../hooks/useAuth';
+import ApplicationCard from '../components/ApplicationCard';
+import DashboardSidebar from '../components/DashboardSidebar';
+import Navbar from '../components/Navbar';
+import PropertyCard from '../components/PropertyCard';
+import SearchFilters from '../components/SearchFilters';
 import { useToast } from '../context/ToastContext';
+import { useAuth } from '../hooks/useAuth';
 
 const TenantDashboard = () => {
   const [searchParams] = useSearchParams();
@@ -49,7 +49,8 @@ const TenantDashboard = () => {
       const url = queryString ? `/properties?${queryString}` : '/properties';
       
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8000/api/tenant${url}`, {
+      const apiUrl = `${window.location.protocol}//${window.location.hostname}:8000/api/tenant${url}`;
+      const response = await fetch(apiUrl, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

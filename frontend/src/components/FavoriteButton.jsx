@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useToast } from '../context/ToastContext';
 
@@ -19,9 +19,10 @@ const FavoriteButton = ({ propertyId, initialIsFavorited = false, onToggle }) =>
     
     try {
       const token = localStorage.getItem('token');
+      const baseUrl = `${window.location.protocol}//${window.location.hostname}:8000/api/favorites`;
       const url = isFavorited 
-        ? `http://localhost:8000/api/favorites/${propertyId}`
-        : 'http://localhost:8000/api/favorites/';
+        ? `${baseUrl}/${propertyId}`
+        : `${baseUrl}/`;
       
       const options = {
         method: isFavorited ? 'DELETE' : 'POST',

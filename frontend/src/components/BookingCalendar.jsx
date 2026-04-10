@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Alert, Button, Card, Form, Spinner } from 'react-bootstrap';
 import { useToast } from '../context/ToastContext';
 
 const BookingCalendar = ({ property, onBookingSuccess }) => {
@@ -27,7 +27,7 @@ const BookingCalendar = ({ property, onBookingSuccess }) => {
     try {
       setLoadingBookings(true);
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8000/api/bookings/property/${property.id}/bookings`, {
+      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8000/api/bookings/property/${property.id}/bookings`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -136,7 +136,7 @@ const BookingCalendar = ({ property, onBookingSuccess }) => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/bookings/', {
+      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8000/api/bookings/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

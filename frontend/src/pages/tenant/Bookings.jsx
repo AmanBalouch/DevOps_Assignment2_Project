@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Badge, Button, Spinner, Alert } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Alert, Badge, Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useToast } from '../../context/ToastContext';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import DashboardSidebar from '../../components/DashboardSidebar';
 import Navbar from '../../components/Navbar';
+import { useToast } from '../../context/ToastContext';
 
 const Bookings = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Bookings = () => {
       setLoading(true);
       setError('');
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/bookings/my-bookings', {
+      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8000/api/bookings/my-bookings`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -61,7 +61,7 @@ const Bookings = () => {
       setCancellingId(selectedBooking.id);
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:8000/api/bookings/${selectedBooking.id}/status`,
+        `${window.location.protocol}//${window.location.hostname}:8000/api/bookings/${selectedBooking.id}/status`,
         {
           method: 'PATCH',
           headers: {

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Spinner, Alert, Button } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Alert, Button, Col, Container, Row, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useToast } from '../../context/ToastContext';
-import PropertyCard from '../../components/PropertyCard';
 import DashboardSidebar from '../../components/DashboardSidebar';
 import Navbar from '../../components/Navbar';
+import PropertyCard from '../../components/PropertyCard';
+import { useToast } from '../../context/ToastContext';
 
 const Favorites = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Favorites = () => {
       setLoading(true);
       setError('');
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/favorites/', {
+      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8000/api/favorites/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

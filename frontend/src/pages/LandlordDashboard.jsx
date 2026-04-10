@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import DashboardSidebar from '../components/DashboardSidebar';
-import PropertyCard from '../components/PropertyCard';
+import { landlordAPI } from '../api';
 import ApplicationCard from '../components/ApplicationCard';
 import ConfirmDialog from '../components/ConfirmDialog';
-import { landlordAPI } from '../api';
-import { useAuth } from '../hooks/useAuth';
+import DashboardSidebar from '../components/DashboardSidebar';
+import Navbar from '../components/Navbar';
+import PropertyCard from '../components/PropertyCard';
 import { useToast } from '../context/ToastContext';
+import { useAuth } from '../hooks/useAuth';
 
 const LandlordDashboard = () => {
   const [searchParams] = useSearchParams();
@@ -95,7 +95,7 @@ const LandlordDashboard = () => {
       // Fetch bookings for each property
       for (const property of propertiesData) {
         const response = await fetch(
-          `http://localhost:8000/api/bookings/property/${property.id}/bookings`,
+          `${window.location.protocol}//${window.location.hostname}:8000/api/bookings/property/${property.id}/bookings`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -245,7 +245,7 @@ const LandlordDashboard = () => {
       setUpdatingBookingId(bookingId);
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:8000/api/bookings/${bookingId}/status`,
+        `${window.location.protocol}//${window.location.hostname}:8000/api/bookings/${bookingId}/status`,
         {
           method: 'PATCH',
           headers: {
