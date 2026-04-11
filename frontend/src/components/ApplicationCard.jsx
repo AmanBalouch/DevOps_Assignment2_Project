@@ -8,7 +8,7 @@ const ApplicationCard = ({ application, isLandlord = false, onStatusUpdate }) =>
         return 'warning';
       case 'approved':
         return 'success';
-      case 'rejected':
+      case 'rejected': 
         return 'danger';
       default:
         return 'secondary';
