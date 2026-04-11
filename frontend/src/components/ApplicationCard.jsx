@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Card, Badge, Button } from 'react-bootstrap';
+import { Card, Badge, Button } from 'react-bootstrap'; 
 
 const ApplicationCard = ({ application, isLandlord = false, onStatusUpdate }) => {
   const getStatusVariant = (status) => {
