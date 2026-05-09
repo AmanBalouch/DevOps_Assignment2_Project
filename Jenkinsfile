@@ -18,25 +18,25 @@
 //             steps {
 //                 echo '========== Checking Docker and Docker Compose =========='
 //                 sh 'docker --version'
-//                 sh 'docker-compose --version'
+//                 sh 'docker compose --version'
 //             }
 //         }
         
 //         stage('Build Docker Images') {
 //             steps {
 //                 echo '========== Building Docker Images =========='
-//                 sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} build'
+//                 sh 'docker compose -f ${DOCKER_COMPOSE_FILE} build'
 //             }
 //         }
         
 //         stage('Start Services') {
 //             steps {
 //                 echo '========== Stopping Previous Services (if running) =========='
-//                 sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} down || true'
+//                 sh 'docker compose -f ${DOCKER_COMPOSE_FILE} down || true'
 //                 sh 'sleep 5'
                 
 //                 echo '========== Starting Services =========='
-//                 sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} up -d'
+//                 sh 'docker compose -f ${DOCKER_COMPOSE_FILE} up -d'
 //                 sh 'sleep 10'
 //             }
 //         }
@@ -85,7 +85,7 @@
 //         }
 //         failure {
 //             echo '❌ Pipeline Failed! Stopping containers...'
-//             sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} down'
+//             sh 'docker compose -f ${DOCKER_COMPOSE_FILE} down'
 //         }
 //         always {
 //             echo '========== Pipeline Execution Completed =========='
@@ -113,25 +113,25 @@ pipeline {
             steps {
                 echo '========== Checking Docker and Docker Compose =========='
                 sh 'docker --version'
-                sh 'docker-compose --version'
+                sh 'docker compose --version'
             }
         }
 
         stage('Build Docker Images') {
             steps {
                 echo '========== Building Docker Images =========='
-                sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} build'
+                sh 'docker compose -f ${DOCKER_COMPOSE_FILE} build'
             }
         }
 
         stage('Start Services') {
             steps {
                 echo '========== Stopping Previous Services (if running) =========='
-                sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} down || true'
+                sh 'docker compose -f ${DOCKER_COMPOSE_FILE} down || true'
                 sh 'sleep 5'
 
                 echo '========== Starting Services =========='
-                sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} up -d'
+                sh 'docker compose -f ${DOCKER_COMPOSE_FILE} up -d'
                 sh 'sleep 15'
             }
         }
@@ -272,7 +272,7 @@ Build URL: ${env.BUILD_URL}
 
         failure {
             echo '❌ Pipeline Failed!'
-            sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} down || true'
+            sh 'docker compose -f ${DOCKER_COMPOSE_FILE} down || true'
         }
     }
 }
